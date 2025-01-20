@@ -16,13 +16,13 @@ def get_days_from_today(date: str)-> int:
     Returns:
     int: Difference in days.
     """
-    date_parts: list = date.split("-")
-    new_date: datetime = datetime(int(date_parts[0]), int(date_parts[1]), int(date_parts[2]) )
+    new_date: datetime = datetime.strptime(date, "%Y-%m-%d")
     now_date: datetime = datetime.today()
     result: timedelta = now_date - new_date
     return result.days
 
 print(get_days_from_today('2020-10-09'))
+
 
 
 
@@ -42,7 +42,7 @@ def get_numbers_ticket(min: int, max: int, quantity: int)-> list:
     return [random.randint(min, max) for _ in range(quantity)]
 
 
-lottery_numbers = get_numbers_ticket(1, 49, 6)
+lottery_numbers: list = get_numbers_ticket(1, 49, 6)
 print("Ваші лотерейні числа:", lottery_numbers)
 
 
@@ -57,7 +57,7 @@ def normalize_phone(phone_number: str)-> str:
     Returns:
     str: Normalized phone number.
     """
-    only_digits = re.sub(r"\D", "", phone_number)
+    only_digits: str = re.sub(r"\D", "", phone_number)
     
     if only_digits.startswith("380"):
         only_digits = "+" + only_digits
@@ -83,7 +83,7 @@ raw_numbers = [
     "38050 111 22 11   ",
 ]
 
-sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
+sanitized_numbers: list = [normalize_phone(num) for num in raw_numbers]
 
 
 print(sanitized_numbers)
