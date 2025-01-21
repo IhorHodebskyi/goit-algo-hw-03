@@ -1,10 +1,6 @@
-
 from datetime import datetime, timedelta
 import random
 import re
-
-
-
 
 def get_days_from_today(date: str)-> int:
     """
@@ -16,12 +12,16 @@ def get_days_from_today(date: str)-> int:
     Returns:
     int: Difference in days.
     """
-    new_date: datetime = datetime.strptime(date, "%Y-%m-%d")
-    now_date: datetime = datetime.today()
-    result: timedelta = now_date - new_date
-    return result.days
+    try:
+        new_date: datetime = datetime.strptime(date, "%Y-%m-%d")
+        now_date: datetime = datetime.today()
+        result: timedelta = now_date - new_date
+        return result.days
+    except ValueError:
+        print(f"Error: Invalid date format. Please use 'YYYY-MM-DD'. Input was: {date}")
+        return None
 
-print(get_days_from_today('2020-10-09'))
+print(get_days_from_today('10-09-2000'))
 
 
 
@@ -39,10 +39,13 @@ def get_numbers_ticket(min: int, max: int, quantity: int)-> list:
     Returns:
     list: List of random numbers.
     """
-    return [random.randint(min, max) for _ in range(quantity)]
+    if min > 0 and max < 1001 and min <= quantity <= max:
+        return [random.randint(min, max) for _ in range(quantity)]
+    else:
+        return []
 
 
-lottery_numbers: list = get_numbers_ticket(1, 49, 6)
+lottery_numbers: list = get_numbers_ticket(-1, 49, 6)
 print("Ваші лотерейні числа:", lottery_numbers)
 
 
@@ -58,16 +61,16 @@ def normalize_phone(phone_number: str)-> str:
     str: Normalized phone number.
     """
     only_digits: str = re.sub(r"\D", "", phone_number)
-    
+
     if only_digits.startswith("380"):
         only_digits = "+" + only_digits
     elif only_digits.startswith("0"):
         only_digits = "+38" + only_digits
 
     return only_digits
-  
-    
-    
+
+
+
 
 
 
