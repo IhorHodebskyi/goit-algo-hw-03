@@ -39,7 +39,7 @@ def get_numbers_ticket(min: int, max: int, quantity: int)-> list:
     Returns:
     list: List of random numbers.
     """
-    if min > 0 and max < 1001 and min <= quantity <= max:
+    if min > 0 and max < 1001 and min < max and 0 < quantity <= (max - min + 1):
         return [random.randint(min, max) for _ in range(quantity)]
     else:
         return []
