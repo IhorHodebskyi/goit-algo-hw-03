@@ -40,12 +40,12 @@ def get_numbers_ticket(min: int, max: int, quantity: int)-> list:
     list: List of random numbers.
     """
     if min > 0 and max < 1001 and min < max and 0 < quantity <= (max - min + 1):
-        return [random.randint(min, max) for _ in range(quantity)]
+        return sorted(random.sample(range(min, max + 1), quantity))
     else:
         return []
 
 
-lottery_numbers: list = get_numbers_ticket(-1, 49, 6)
+lottery_numbers: list = get_numbers_ticket(1, 49, 6)
 print("Ваші лотерейні числа:", lottery_numbers)
 
 
